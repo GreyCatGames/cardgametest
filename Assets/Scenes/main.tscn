@@ -1,0 +1,343 @@
+[gd_scene load_steps=18 format=3 uid="uid://cm0o14i7c3a08"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/card_manager.gd" id="1_scd68"]
+[ext_resource type="Script" path="res://Assets/Scripts/player_hand.gd" id="3_0lsae"]
+[ext_resource type="Script" path="res://Assets/Scripts/opponent_hand.gd" id="3_7wmmi"]
+[ext_resource type="Script" path="res://Assets/Scripts/deck.gd" id="4_jhbm4"]
+[ext_resource type="Texture2D" uid="uid://dec0ynxfplrsc" path="res://Assets/Art/CardBack.png" id="5_ir0st"]
+[ext_resource type="Script" path="res://Assets/Scripts/input_manager.gd" id="6_5w55k"]
+[ext_resource type="Script" path="res://Assets/Scripts/opponent_deck.gd" id="6_o0pb0"]
+[ext_resource type="PackedScene" uid="uid://75ho5pf452ul" path="res://Assets/Scenes/opponent_card_slot.tscn" id="7_jys6h"]
+[ext_resource type="Script" path="res://Assets/Scripts/battle_manager.gd" id="8_idau1"]
+[ext_resource type="Texture2D" uid="uid://ywgfji1ohy0m" path="res://Assets/Art/cardHolder.png" id="11_har60"]
+[ext_resource type="Script" path="res://Assets/Scenes/log_book_container.gd" id="12_2pjuj"]
+[ext_resource type="PackedScene" uid="uid://chvcehgx0ctg3" path="res://Assets/Scenes/player_mat.tscn" id="12_uvow2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cislx"]
+size = Vector2(244, 347)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gl5b7"]
+size = Vector2(246.667, 348.333)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0teev"]
+size = Vector2(245.001, 351.666)
+
+[sub_resource type="Gradient" id="Gradient_ikwpr"]
+offsets = PackedFloat32Array(0.993976, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5oe43"]
+gradient = SubResource("Gradient_ikwpr")
+
+[node name="Main" type="Node2D"]
+metadata/_edit_horizontal_guides_ = [-134.0]
+
+[node name="BattleManager" type="Node" parent="."]
+script = ExtResource("8_idau1")
+
+[node name="CardManager" type="Node2D" parent="."]
+script = ExtResource("1_scd68")
+
+[node name="InputManager" type="Node2D" parent="."]
+script = ExtResource("6_5w55k")
+
+[node name="PlayerHand" type="Node2D" parent="."]
+script = ExtResource("3_0lsae")
+
+[node name="OpponentHand" type="Node2D" parent="."]
+position = Vector2(1790, 158)
+script = ExtResource("3_7wmmi")
+
+[node name="PlayerDeck" type="Node2D" parent="."]
+position = Vector2(114, 927)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_jhbm4")
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerDeck"]
+z_index = -2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_ir0st")
+
+[node name="Area2D" type="Area2D" parent="PlayerDeck"]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDeck/Area2D"]
+position = Vector2(-1, 1.5)
+shape = SubResource("RectangleShape2D_cislx")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PlayerDeck"]
+modulate = Color(0, 0, 0, 1)
+z_index = -2
+offset_left = -23.0
+offset_top = -29.0
+offset_right = 17.0
+offset_bottom = 11.0
+scale = Vector2(2, 2)
+text = "0"
+
+[node name="OppDeck" type="Node2D" parent="."]
+position = Vector2(1790, 158)
+rotation = 3.14159
+scale = Vector2(0.8, 0.8)
+script = ExtResource("6_o0pb0")
+
+[node name="Sprite2D" type="Sprite2D" parent="OppDeck"]
+z_index = -2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_ir0st")
+
+[node name="OppSlots" type="Node2D" parent="."]
+
+[node name="ECardSlot" parent="OppSlots" instance=ExtResource("7_jys6h")]
+position = Vector2(960, 194)
+rotation = 3.14159
+
+[node name="ECardSlot2" parent="OppSlots" instance=ExtResource("7_jys6h")]
+position = Vector2(1120, 194)
+rotation = 3.14159
+
+[node name="ECardSlot3" parent="OppSlots" instance=ExtResource("7_jys6h")]
+position = Vector2(1280, 194)
+rotation = 3.14159
+
+[node name="ECardSlot4" parent="OppSlots" instance=ExtResource("7_jys6h")]
+position = Vector2(800, 194)
+rotation = 3.14159
+
+[node name="ECardSlot5" parent="OppSlots" instance=ExtResource("7_jys6h")]
+position = Vector2(640, 194)
+rotation = 3.14159
+
+[node name="TextContainer" type="Node2D" parent="."]
+
+[node name="Energy" type="Node2D" parent="TextContainer"]
+position = Vector2(0, 42)
+
+[node name="EnergyTxt" type="RichTextLabel" parent="TextContainer/Energy"]
+offset_left = 115.0
+offset_top = 430.0
+offset_right = 257.305
+offset_bottom = 470.0
+scale = Vector2(2, 2)
+text = "Current Energy:
+"
+scroll_active = false
+
+[node name="EnergyNum" type="RichTextLabel" parent="TextContainer/Energy"]
+offset_left = 398.0
+offset_top = 430.0
+offset_right = 424.23
+offset_bottom = 470.0
+scale = Vector2(2, 2)
+text = "0
+"
+scroll_active = false
+
+[node name="PlayerHealth" type="Node2D" parent="TextContainer"]
+position = Vector2(0, -17)
+
+[node name="HealthTxt" type="RichTextLabel" parent="TextContainer/PlayerHealth"]
+offset_left = 115.0
+offset_top = 430.0
+offset_right = 257.305
+offset_bottom = 470.0
+scale = Vector2(2, 2)
+text = "Player Health:
+"
+scroll_active = false
+
+[node name="HealthNum" type="RichTextLabel" parent="TextContainer/PlayerHealth"]
+offset_left = 371.0
+offset_top = 430.0
+offset_right = 397.23
+offset_bottom = 470.0
+scale = Vector2(2, 2)
+text = "0
+"
+scroll_active = false
+
+[node name="OppHealth" type="Node2D" parent="TextContainer"]
+position = Vector2(0, -320)
+
+[node name="HealthTxt" type="RichTextLabel" parent="TextContainer/OppHealth"]
+offset_left = 115.0
+offset_top = 430.0
+offset_right = 257.305
+offset_bottom = 470.0
+scale = Vector2(2, 2)
+text = "Opponent Health:
+"
+scroll_active = false
+
+[node name="HealthNum" type="RichTextLabel" parent="TextContainer/OppHealth"]
+offset_left = 411.0
+offset_top = 430.0
+offset_right = 437.23
+offset_bottom = 470.0
+scale = Vector2(2, 2)
+text = "0
+"
+scroll_active = false
+
+[node name="PlayerMat" parent="TextContainer" instance=ExtResource("12_uvow2")]
+visible = false
+position = Vector2(271, 166)
+
+[node name="PlayerGY" type="Node2D" parent="."]
+z_index = 3
+position = Vector2(114, 669)
+scale = Vector2(0.6, 0.6)
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerGY"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_har60")
+
+[node name="Txt" type="RichTextLabel" parent="PlayerGY"]
+modulate = Color(0, 0, 0, 1)
+offset_left = -28.3333
+offset_top = -93.3333
+offset_right = 59.1967
+offset_bottom = -53.3333
+scale = Vector2(2.5, 2.5)
+text = "GY"
+
+[node name="Count" type="RichTextLabel" parent="PlayerGY"]
+modulate = Color(0, 0, 0, 1)
+offset_left = -10.0
+offset_top = -28.3333
+offset_right = 77.53
+offset_bottom = 11.6667
+scale = Vector2(2.5, 2.5)
+text = "0
+"
+
+[node name="Area2D" type="Area2D" parent="PlayerGY"]
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerGY/Area2D"]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_gl5b7")
+
+[node name="OppGY" type="Node2D" parent="."]
+z_index = 3
+position = Vector2(1790, 416)
+rotation = 3.14159
+scale = Vector2(0.6, 0.6)
+
+[node name="Sprite2D" type="Sprite2D" parent="OppGY"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_har60")
+
+[node name="Txt" type="RichTextLabel" parent="OppGY"]
+modulate = Color(0, 0, 0, 1)
+offset_left = -28.3333
+offset_top = -93.3333
+offset_right = 59.1967
+offset_bottom = -53.3333
+scale = Vector2(2.5, 2.5)
+text = "GY"
+
+[node name="Count" type="RichTextLabel" parent="OppGY"]
+modulate = Color(0, 0, 0, 1)
+offset_left = 13.3333
+offset_top = 31.667
+offset_right = 100.863
+offset_bottom = 71.667
+rotation = 3.14159
+scale = Vector2(2.5, 2.5)
+text = "0
+"
+
+[node name="Area2D" type="Area2D" parent="OppGY"]
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OppGY/Area2D"]
+position = Vector2(2.5, 2.50006)
+shape = SubResource("RectangleShape2D_0teev")
+
+[node name="PlayerMat" parent="." instance=ExtResource("12_uvow2")]
+z_index = -1
+position = Vector2(951, 585)
+scale = Vector2(1.49, 1)
+
+[node name="ZoomedInCard" type="Node2D" parent="."]
+visible = false
+z_index = 4
+position = Vector2(965, 2)
+scale = Vector2(7.685, 3.845)
+
+[node name="Background" type="Sprite2D" parent="ZoomedInCard"]
+modulate = Color(1, 1, 1, 0.313726)
+position = Vector2(0, 143.25)
+scale = Vector2(1, 287.5)
+texture = SubResource("GradientTexture1D_5oe43")
+
+[node name="ZoomedCardImg" type="Sprite2D" parent="ZoomedInCard"]
+position = Vector2(0.260231, 142.263)
+scale = Vector2(0.130124, 0.260078)
+texture = ExtResource("11_har60")
+
+[node name="ZoomedTxt" type="RichTextLabel" parent="ZoomedInCard"]
+modulate = Color(0, 0, 0, 1)
+offset_left = -25.8946
+offset_top = 176.073
+offset_right = 105.355
+offset_bottom = 303.518
+scale = Vector2(0.405, 0.405)
+text = "Stop you violated
+The Law!"
+
+[node name="GraveyardChecker" type="Node2D" parent="."]
+visible = false
+z_index = 4
+position = Vector2(965, 2)
+scale = Vector2(7.685, 3.845)
+
+[node name="Background" type="Sprite2D" parent="GraveyardChecker"]
+modulate = Color(1, 1, 1, 0.313726)
+position = Vector2(0, 143.25)
+scale = Vector2(1, 287.5)
+texture = SubResource("GradientTexture1D_5oe43")
+
+[node name="GraveyardName" type="RichTextLabel" parent="GraveyardChecker"]
+offset_left = -43.8517
+offset_right = 68.7033
+offset_bottom = 53.39
+text = "JUNKYARD
+     OPEN"
+
+[node name="LogBookContainer" type="Node2D" parent="."]
+z_index = 5
+position = Vector2(2162, 551)
+script = ExtResource("12_2pjuj")
+
+[node name="CardHistorySpace" type="Node2D" parent="LogBookContainer"]
+
+[node name="LogBookBGImg" type="Sprite2D" parent="LogBookContainer/CardHistorySpace"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-152, -32)
+scale = Vector2(0.35, 1.675)
+texture = ExtResource("11_har60")
+
+[node name="EndTurn" type="Button" parent="."]
+offset_left = 1432.0
+offset_top = 492.0
+offset_right = 1510.0
+offset_bottom = 523.0
+scale = Vector2(2.5, 2.5)
+text = "End Turn"
+
+[node name="LogBook" type="Button" parent="."]
+offset_left = 1437.0
+offset_top = 677.0
+offset_right = 1512.0
+offset_bottom = 708.0
+scale = Vector2(2.5, 2.5)
+text = "LogBook"
+
+[node name="BattleTimer" type="Timer" parent="."]
+
+[connection signal="pressed" from="EndTurn" to="BattleManager" method="_on_end_turn_pressed"]
+[connection signal="pressed" from="LogBook" to="BattleManager" method="_on_log_book_pressed"]

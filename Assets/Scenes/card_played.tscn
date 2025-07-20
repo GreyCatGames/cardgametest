@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://3a0f61jx0drx"]
+
+[ext_resource type="Texture2D" uid="uid://ywgfji1ohy0m" path="res://Assets/Art/cardHolder.png" id="1_eulby"]
+[ext_resource type="PackedScene" uid="uid://m3wxc366ockn" path="res://Assets/Scenes/card_history.tscn" id="2_cjwvd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hk62y"]
+size = Vector2(488, 704)
+
+[node name="PlayedCard" type="Node2D"]
+visible = false
+scale = Vector2(0.25, 0.25)
+
+[node name="HistoryImg" type="Sprite2D" parent="."]
+texture = ExtResource("1_eulby")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_hk62y")
+
+[node name="PlayerCardHistory" parent="." instance=ExtResource("2_cjwvd")]
+z_index = -1
+position = Vector2(0, -44)
+scale = Vector2(4, 4.12)

@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://nbr0lcbjq1j8"]
+
+[ext_resource type="Texture2D" uid="uid://ywgfji1ohy0m" path="res://Assets/Art/cardHolder.png" id="1_b6pqg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ho04"]
+size = Vector2(291, 422)
+
+[node name="GraveyardCard" type="Node2D"]
+position = Vector2(-79.5055, 62.9389)
+
+[node name="GraveYardImg" type="Sprite2D" parent="."]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_b6pqg")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.994492, -0.938904)
+shape = SubResource("RectangleShape2D_5ho04")

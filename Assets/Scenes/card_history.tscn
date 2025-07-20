@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://m3wxc366ockn"]
+
+[ext_resource type="Texture2D" uid="uid://ywgfji1ohy0m" path="res://Assets/Art/cardHolder.png" id="1_uq2aq"]
+
+[node name="PlayerCardHistory" type="Node2D"]
+
+[node name="LogBookBGImg" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(0.35, 0.3)
+texture = ExtResource("1_uq2aq")
+
+[node name="TurnTxt" type="RichTextLabel" parent="."]
+modulate = Color(0, 0, 0, 1)
+offset_left = -71.0
+offset_top = -97.0
+offset_right = -11.65
+offset_bottom = -57.0
+scale = Vector2(1.8, 1.8)
+text = "Turn: "
+
+[node name="TurnNum" type="RichTextLabel" parent="."]
+modulate = Color(0, 0, 0, 1)
+offset_left = 15.0
+offset_top = -97.0
+offset_right = 74.35
+offset_bottom = -57.0
+scale = Vector2(1.8, 1.8)
+text = "1"
