@@ -39,7 +39,6 @@ func _ready() -> void:
 	battle_timer = $"../BattleTimer"
 	battle_timer.one_shot = true
 	battle_timer.wait_time = 1.0
-	#test test
 	empty_opp_slots.append($"../OppSlots/ECardSlot")
 	empty_opp_slots.append($"../OppSlots/ECardSlot2")
 	empty_opp_slots.append($"../OppSlots/ECardSlot3")
